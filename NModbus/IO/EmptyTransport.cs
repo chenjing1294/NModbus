@@ -3,7 +3,7 @@ using NModbus.Logging;
 
 namespace NModbus.IO
 {
-    internal class EmptyTransport : ModbusTransport
+    public class EmptyTransport : ModbusTransport
     {
         public EmptyTransport(IModbusFactory modbusFactory)
             : base(modbusFactory, NullModbusLogger.Instance)

@@ -6,17 +6,12 @@ using NModbus.Unme.Common;
 
 namespace NModbus.IO
 {
-    /// <summary>
-    ///     Concrete Implementor - http://en.wikipedia.org/wiki/Bridge_Pattern
-    /// </summary>
     public class TcpClientAdapter : IStreamResource
     {
         private TcpClient _tcpClient;
 
         public TcpClientAdapter(TcpClient tcpClient)
         {
-            Debug.Assert(tcpClient != null, "Argument tcpClient cannot be null.");
-
             _tcpClient = tcpClient;
         }
 

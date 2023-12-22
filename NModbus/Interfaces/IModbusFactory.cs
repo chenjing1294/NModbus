@@ -1,4 +1,5 @@
 ﻿using System.Net.Sockets;
+using NModbus.Device.Network;
 using NModbus.IO;
 
 namespace NModbus
@@ -79,7 +80,7 @@ namespace NModbus
         /// </summary>
         /// <param name="tcpListener"></param>
         /// <returns></returns>
-        IModbusTcpSlaveNetwork CreateSlaveNetwork(TcpListener tcpListener);
+        ModbusNetwork CreateSlaveNetwork(TcpListener tcpListener);
 
         /// <summary>
         /// Modbus RTU Over TCP/IP

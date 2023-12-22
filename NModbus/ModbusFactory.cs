@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using NModbus.Extensions;
 using NModbus.Data;
 using NModbus.Device;
+using NModbus.Device.Network;
 using NModbus.IO;
 using NModbus.Logging;
 
@@ -91,32 +92,32 @@ namespace NModbus
 
         public IModbusSlaveNetwork CreateSlaveNetwork(IModbusRtuTransport transport)
         {
-            return new ModbusSerialSlaveNetwork(transport, this, Logger);
+            return new ModbusSerialNetwork(transport, this, Logger);
         }
 
         public IModbusSlaveNetwork CreateSlaveNetwork(IModbusAsciiTransport transport)
         {
-            return new ModbusSerialSlaveNetwork(transport, this, Logger);
+            return new ModbusSerialNetwork(transport, this, Logger);
         }
 
-        public IModbusTcpSlaveNetwork CreateSlaveNetwork(TcpListener tcpListener)
+        public ModbusNetwork CreateSlaveNetwork(TcpListener tcpListener)
         {
-            return new ModbusTcpSlaveNetwork(tcpListener, this, Logger);
+            return new ModbusTcpNetwork(tcpListener, this, Logger);
         }
 
         public IModbusSlaveNetwork CreateRtuSlaveNetwork(TcpListener tcpListener)
         {
-            return new ModbusSerialOverTcpSlaveNetwork(tcpListener, this, Logger);
+            return new ModbusSerialOverTcpNetwork(tcpListener, this, Logger);
         }
 
         public IModbusSlaveNetwork CreateRtuSlaveNetwork(UdpClient client)
         {
-            return new ModbusSerialOverUdpSlaveNetwork(client, this, Logger);
+            return new ModbusSerialOverUdpNetwork(client, this, Logger);
         }
 
         public IModbusSlaveNetwork CreateSlaveNetwork(UdpClient client)
         {
-            return new ModbusUdpSlaveNetwork(client, this, Logger);
+            return new ModbusUdpNetwork(client, this, Logger);
         }
 
         public IModbusRtuTransport CreateRtuTransport(IStreamResource streamResource)

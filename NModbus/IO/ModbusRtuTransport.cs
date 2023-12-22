@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using NModbus.Extensions;
@@ -8,20 +7,15 @@ using NModbus.Utility;
 
 namespace NModbus.IO
 {
-    /// <summary>
-    ///     Refined Abstraction - http://en.wikipedia.org/wiki/Bridge_Pattern
-    /// </summary>
     internal class ModbusRtuTransport : ModbusSerialTransport, IModbusRtuTransport
     {
         public const int RequestFrameStartLength = 7;
-
         public const int ResponseFrameStartLength = 4;
 
         internal ModbusRtuTransport(IStreamResource streamResource, IModbusFactory modbusFactory, IModbusLogger logger)
             : base(streamResource, modbusFactory, logger)
         {
             if (modbusFactory == null) throw new ArgumentNullException(nameof(modbusFactory));
-            Debug.Assert(streamResource != null, "Argument streamResource cannot be null.");
         }
 
         internal int RequestBytesToRead(byte[] frameStart)
@@ -55,7 +49,6 @@ namespace NModbus.IO
             while (numBytesReadTotal != count)
             {
                 int numBytesRead = StreamResource.Read(frameBytes, numBytesReadTotal, count - numBytesReadTotal);
-
                 if (numBytesRead == 0)
                 {
                     throw new IOException("Read resulted in 0 bytes returned.");
