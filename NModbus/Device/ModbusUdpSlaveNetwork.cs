@@ -31,10 +31,7 @@ namespace NModbus.Device
         /// </summary>
         public override async Task ListenAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            using (cancellationToken.Register(() =>
-            {
-                _udpClient.Dispose();
-            }))
+            using (cancellationToken.Register(() => { _udpClient.Dispose(); }))
             {
                 Logger.Information("Start Modbus Udp Server.");
 
@@ -51,7 +48,7 @@ namespace NModbus.Device
                         Logger.LogFrameRx(frame);
 
                         IModbusMessage request = ModbusFactory.CreateModbusRequest(frame.Slice(6, frame.Length - 6).ToArray());
-                        request.TransactionId = (ushort)IPAddress.NetworkToHostOrder(BitConverter.ToInt16(frame, 0));
+                        request.TransactionId = (ushort) IPAddress.NetworkToHostOrder(BitConverter.ToInt16(frame, 0));
 
                         // perform action and build response
                         IModbusMessage response = ApplyRequest(request);
@@ -70,7 +67,7 @@ namespace NModbus.Device
                         }
                     }
                 }
-                catch( ObjectDisposedException) when (cancellationToken.IsCancellationRequested)
+                catch (ObjectDisposedException) when (cancellationToken.IsCancellationRequested)
                 {
                     // Swallow this error.
                 }

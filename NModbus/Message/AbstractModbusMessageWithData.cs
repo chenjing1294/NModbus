@@ -16,7 +16,7 @@ namespace NModbus.Message
 
         public TData Data
         {
-            get => (TData)MessageImpl.Data;
+            get => (TData) MessageImpl.Data;
             set => MessageImpl.Data = value;
         }
     }

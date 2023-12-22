@@ -21,17 +21,19 @@ namespace NModbus.IO
         }
 
         public int InfiniteTimeout => Timeout.Infinite;
-        public int ReadTimeout 
-        { 
+
+        public int ReadTimeout
+        {
             get => _socketClient.SendTimeout;
             set => _socketClient.SendTimeout = value;
-
         }
+
         public int WriteTimeout
         {
             get => _socketClient.ReceiveTimeout;
             set => _socketClient.ReceiveTimeout = value;
         }
+
         public void DiscardInBuffer()
         {
             // socket does not hold buffers.
@@ -40,13 +42,12 @@ namespace NModbus.IO
 
         public int Read(byte[] buffer, int offset, int size)
         {
-            
-            return _socketClient.Receive(buffer,offset,size,0);
+            return _socketClient.Receive(buffer, offset, size, 0);
         }
 
         public void Write(byte[] buffer, int offset, int size)
         {
-            _socketClient.Send(buffer,offset,size,0);
+            _socketClient.Send(buffer, offset, size, 0);
         }
 
 

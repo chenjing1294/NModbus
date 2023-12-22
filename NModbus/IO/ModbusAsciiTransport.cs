@@ -27,7 +27,7 @@ namespace NModbus.IO
             var nlAscii = Encoding.UTF8.GetBytes(Modbus.NewLine.ToCharArray());
 
             var frame = new MemoryStream(1 + msgFrameAscii.Length + lrcAscii.Length + nlAscii.Length);
-            frame.WriteByte((byte)':');
+            frame.WriteByte((byte) ':');
             frame.Write(msgFrameAscii, 0, msgFrameAscii.Length);
             frame.Write(lrcAscii, 0, lrcAscii.Length);
             frame.Write(nlAscii, 0, nlAscii.Length);

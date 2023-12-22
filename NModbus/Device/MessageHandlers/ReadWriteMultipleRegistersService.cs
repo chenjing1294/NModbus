@@ -7,7 +7,7 @@ namespace NModbus.Device.MessageHandlers
 {
     public class ReadWriteMultipleRegistersService : ModbusFunctionServiceBase<ReadWriteMultipleRegistersRequest>
     {
-        public ReadWriteMultipleRegistersService() 
+        public ReadWriteMultipleRegistersService()
             : base(ModbusFunctionCodes.ReadWriteMultipleRegisters)
         {
         }

@@ -7,7 +7,7 @@
         private const int LevelColumnSize = 15;
         private static readonly string BlankHeader = Environment.NewLine + new string(' ', LevelColumnSize);
 
-        public ConsoleModbusLogger(LoggingLevel minimumLoggingLevel = LoggingLevel.Debug) 
+        public ConsoleModbusLogger(LoggingLevel minimumLoggingLevel = LoggingLevel.Debug)
             : base(minimumLoggingLevel)
         {
         }

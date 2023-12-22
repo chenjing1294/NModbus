@@ -18,7 +18,7 @@ namespace NModbus.UnitTests.Message
         public void Initialize()
         {
             ModbusMessageImpl messageImpl = new ModbusMessageImpl();
-            messageImpl.Initialize(new byte[] { 1, 2, 9, 9, 9, 9 });
+            messageImpl.Initialize(new byte[] {1, 2, 9, 9, 9, 9});
             Assert.Equal(1, messageImpl.SlaveAddress);
             Assert.Equal(2, messageImpl.FunctionCode);
         }
@@ -34,14 +34,14 @@ namespace NModbus.UnitTests.Message
         public void InitializeInvalidFrame()
         {
             ModbusMessageImpl messageImpl = new ModbusMessageImpl();
-            Assert.Throws<FormatException>(() => messageImpl.Initialize(new byte[] { 1 }));
+            Assert.Throws<FormatException>(() => messageImpl.Initialize(new byte[] {1}));
         }
 
         [Fact]
         public void ProtocolDataUnit()
         {
             ModbusMessageImpl messageImpl = new ModbusMessageImpl(11, ModbusFunctionCodes.ReadCoils);
-            byte[] expectedResult = { ModbusFunctionCodes.ReadCoils };
+            byte[] expectedResult = {ModbusFunctionCodes.ReadCoils};
             Assert.Equal(expectedResult, messageImpl.ProtocolDataUnit);
         }
 
@@ -49,7 +49,7 @@ namespace NModbus.UnitTests.Message
         public void MessageFrame()
         {
             ModbusMessageImpl messageImpl = new ModbusMessageImpl(11, ModbusFunctionCodes.ReadHoldingRegisters);
-            byte[] expectedMessageFrame = { 11, ModbusFunctionCodes.ReadHoldingRegisters };
+            byte[] expectedMessageFrame = {11, ModbusFunctionCodes.ReadHoldingRegisters};
             Assert.Equal(expectedMessageFrame, messageImpl.MessageFrame);
         }
     }

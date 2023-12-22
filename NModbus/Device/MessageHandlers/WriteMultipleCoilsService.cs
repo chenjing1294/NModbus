@@ -5,7 +5,7 @@ namespace NModbus.Device.MessageHandlers
 {
     public class WriteMultipleCoilsService : ModbusFunctionServiceBase<WriteMultipleCoilsRequest>
     {
-        public WriteMultipleCoilsService() 
+        public WriteMultipleCoilsService()
             : base(ModbusFunctionCodes.WriteMultipleCoils)
         {
         }
@@ -34,9 +34,9 @@ namespace NModbus.Device.MessageHandlers
             dataStore.CoilDiscretes.WritePoints(request.StartAddress, points);
 
             return new WriteMultipleCoilsResponse(
-               request.SlaveAddress,
-               request.StartAddress,
-               request.NumberOfPoints);
+                request.SlaveAddress,
+                request.StartAddress,
+                request.NumberOfPoints);
         }
     }
 }

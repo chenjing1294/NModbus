@@ -21,7 +21,7 @@ namespace NModbus.UnitTests.IO
             var transport = new ModbusAsciiTransport(StreamResource, new ModbusFactory(), NullModbusLogger.Instance);
             var expectedResponse = new ReadCoilsInputsResponse(ModbusFunctionCodes.ReadCoils, 2, 1, new DiscreteCollection(true, false, false, false, false, false, false, true));
             byte lrc = ModbusUtility.CalculateLrc(expectedResponse.MessageFrame);
-            var response = transport.CreateResponse<ReadCoilsInputsResponse>(new byte[] { 2, ModbusFunctionCodes.ReadCoils, 1, 129, lrc });
+            var response = transport.CreateResponse<ReadCoilsInputsResponse>(new byte[] {2, ModbusFunctionCodes.ReadCoils, 1, 129, lrc});
 
             Assert.IsType<ReadCoilsInputsResponse>(response);
             ModbusMessageFixture.AssertModbusMessagePropertiesAreEqual(expectedResponse, response);
@@ -30,8 +30,8 @@ namespace NModbus.UnitTests.IO
         [Fact]
         public void CreateResponseErroneousLrc()
         {
-            var transport = new ModbusAsciiTransport(StreamResource, new ModbusFactory(), NullModbusLogger.Instance) { CheckFrame = true };
-            var frame = new byte[] { 19, ModbusFunctionCodes.ReadCoils, 0, 0, 0, 2, 115 };
+            var transport = new ModbusAsciiTransport(StreamResource, new ModbusFactory(), NullModbusLogger.Instance) {CheckFrame = true};
+            var frame = new byte[] {19, ModbusFunctionCodes.ReadCoils, 0, 0, 0, 2, 115};
 
             Assert.Throws<IOException>(
                 () => transport.CreateResponse<ReadCoilsInputsResponse>(frame));
@@ -40,9 +40,9 @@ namespace NModbus.UnitTests.IO
         [Fact]
         public void CreateResponseErroneousLrcDoNotCheckFrame()
         {
-            var transport = new ModbusAsciiTransport(StreamResource, new ModbusFactory(), NullModbusLogger.Instance) { CheckFrame = false };
+            var transport = new ModbusAsciiTransport(StreamResource, new ModbusFactory(), NullModbusLogger.Instance) {CheckFrame = false};
 
-            transport.CreateResponse<ReadCoilsInputsResponse>(new byte[] { 19, ModbusFunctionCodes.ReadCoils, 0, 0, 0, 2, 115 });
+            transport.CreateResponse<ReadCoilsInputsResponse>(new byte[] {19, ModbusFunctionCodes.ReadCoils, 0, 0, 0, 2, 115});
         }
 
         /// <summary>

@@ -100,7 +100,7 @@ namespace NModbus.UnitTests
                 formatter.Serialize(stream, e);
                 stream.Position = 0;
 
-                var e2 = (SlaveException)formatter.Deserialize(stream);
+                var e2 = (SlaveException) formatter.Deserialize(stream);
                 Assert.NotNull(e2);
                 Assert.Equal(1, e2.SlaveAddress);
                 Assert.Equal(2, e2.FunctionCode);

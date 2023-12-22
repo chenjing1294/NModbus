@@ -20,7 +20,7 @@
         // default setting for IO timeouts in milliseconds
         //public const int DefaultTimeout = 1000;
 
-      
+
         public const ushort CoilOn = 0xFF00;
         public const ushort CoilOff = 0x0000;
 

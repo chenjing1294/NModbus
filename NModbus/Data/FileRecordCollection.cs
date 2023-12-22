@@ -24,9 +24,9 @@ namespace NModbus.Data
 
         public FileRecordCollection(byte[] messageFrame)
         {
-            var fileNumber = (ushort)IPAddress.NetworkToHostOrder(BitConverter.ToInt16(messageFrame, 4));
-            var startingAdress = (ushort)IPAddress.NetworkToHostOrder(BitConverter.ToInt16(messageFrame, 6));
-            var count = (ushort)IPAddress.NetworkToHostOrder(BitConverter.ToInt16(messageFrame, 8));
+            var fileNumber = (ushort) IPAddress.NetworkToHostOrder(BitConverter.ToInt16(messageFrame, 4));
+            var startingAdress = (ushort) IPAddress.NetworkToHostOrder(BitConverter.ToInt16(messageFrame, 6));
+            var count = (ushort) IPAddress.NetworkToHostOrder(BitConverter.ToInt16(messageFrame, 8));
             var data = messageFrame.Slice(10, count * 2).ToArray();
 
             Build(fileNumber, startingAdress, data);
@@ -45,16 +45,16 @@ namespace NModbus.Data
             {
                 6, // Reference type, demanded by standard definition
             };
-            
+
             void addAsBytes(int value)
             {
-                values.AddRange(BitConverter.GetBytes((ushort)IPAddress.HostToNetworkOrder((short)value)));
+                values.AddRange(BitConverter.GetBytes((ushort) IPAddress.HostToNetworkOrder((short) value)));
             }
 
             addAsBytes(fileNumber);
             addAsBytes(startingAddress);
             addAsBytes(data.Length / 2);
-            
+
             values.AddRange(data);
 
             dataBytes = data;
@@ -81,7 +81,7 @@ namespace NModbus.Data
         /// <summary>
         ///     Gets the byte count.
         /// </summary>
-        public byte ByteCount => (byte)networkBytes.Count;
+        public byte ByteCount => (byte) networkBytes.Count;
 
         /// <summary>
         ///     Returns a <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" />.

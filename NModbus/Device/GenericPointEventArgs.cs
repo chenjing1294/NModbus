@@ -4,7 +4,7 @@
     {
         private readonly T[] _points;
 
-        public PointEventArgs(ushort startAddress, T[] points) : base(startAddress, (ushort)points.Length)
+        public PointEventArgs(ushort startAddress, T[] points) : base(startAddress, (ushort) points.Length)
         {
             _points = points;
         }

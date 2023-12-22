@@ -83,7 +83,7 @@ namespace NModbus.Message
 
         public void ValidateResponse(IModbusMessage response)
         {
-            var typedResponse = (ReadHoldingInputRegistersResponse)response;
+            var typedResponse = (ReadHoldingInputRegistersResponse) response;
             var expectedByteCount = ReadRequest.NumberOfPoints * 2;
 
             if (expectedByteCount != typedResponse.ByteCount)

@@ -13,7 +13,7 @@ namespace NModbus.Device
         private readonly IModbusLogger _logger;
         private readonly IDictionary<byte, IModbusSlave> _slaves = new ConcurrentDictionary<byte, IModbusSlave>();
 
-        protected ModbusSlaveNetwork(IModbusTransport transport, IModbusFactory modbusFactory, IModbusLogger logger) 
+        protected ModbusSlaveNetwork(IModbusTransport transport, IModbusFactory modbusFactory, IModbusLogger logger)
             : base(transport)
         {
             ModbusFactory = modbusFactory;

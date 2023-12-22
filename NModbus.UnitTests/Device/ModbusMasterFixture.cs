@@ -63,8 +63,8 @@ namespace NModbus.UnitTests.Device
         public void ReadWriteMultipleRegisters()
         {
             // validate numberOfPointsToRead
-            Assert.Throws<ArgumentException>(() => Master.ReadWriteMultipleRegisters(1, 1, 0, 1, new ushort[] { 1 }));
-            Assert.Throws<ArgumentException>(() => Master.ReadWriteMultipleRegisters(1, 1, 126, 1, new ushort[] { 1 }));
+            Assert.Throws<ArgumentException>(() => Master.ReadWriteMultipleRegisters(1, 1, 0, 1, new ushort[] {1}));
+            Assert.Throws<ArgumentException>(() => Master.ReadWriteMultipleRegisters(1, 1, 126, 1, new ushort[] {1}));
 
             // validate writeData
             Assert.Throws<ArgumentNullException>(() => Master.ReadWriteMultipleRegisters(1, 1, 1, 1, null));

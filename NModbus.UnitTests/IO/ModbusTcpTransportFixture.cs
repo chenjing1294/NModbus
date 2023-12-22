@@ -19,11 +19,11 @@ namespace NModbus.UnitTests.IO
         [Fact]
         public void BuildMessageFrame()
         {
-            var mock = new Mock<ModbusIpTransport>(StreamResourceMock, new ModbusFactory(),  NullModbusLogger.Instance) { CallBase = true };
+            var mock = new Mock<ModbusIpTransport>(StreamResourceMock, new ModbusFactory(), NullModbusLogger.Instance) {CallBase = true};
             var message = new ReadCoilsInputsRequest(ModbusFunctionCodes.ReadCoils, 2, 10, 5);
 
             byte[] result = mock.Object.BuildMessageFrame(message);
-            Assert.Equal(new byte[] { 0, 0, 0, 0, 0, 6, 2, 1, 0, 10, 0, 5 }, result);
+            Assert.Equal(new byte[] {0, 0, 0, 0, 0, 6, 2, 1, 0, 10, 0, 5}, result);
             mock.VerifyAll();
         }
 
@@ -32,14 +32,14 @@ namespace NModbus.UnitTests.IO
         {
             var message = new WriteMultipleRegistersRequest(3, 1, MessageUtility.CreateDefaultCollection<RegisterCollection, ushort>(0, 120));
             message.TransactionId = 45;
-            Assert.Equal(new byte[] { 0, 45, 0, 0, 0, 247, 3 }, ModbusIpTransport.GetMbapHeader(message));
+            Assert.Equal(new byte[] {0, 45, 0, 0, 0, 247, 3}, ModbusIpTransport.GetMbapHeader(message));
         }
 
         [Fact]
         public void Write()
         {
             var streamMock = new Mock<IStreamResource>(MockBehavior.Strict);
-            var mock = new Mock<ModbusIpTransport>(streamMock.Object, new ModbusFactory(), NullModbusLogger.Instance) { CallBase = true };
+            var mock = new Mock<ModbusIpTransport>(streamMock.Object, new ModbusFactory(), NullModbusLogger.Instance) {CallBase = true};
             var request = new ReadCoilsInputsRequest(ModbusFunctionCodes.ReadCoils, 1, 1, 3);
 
             streamMock.Setup(s => s.Write(It.IsNotNull<byte[]>(), 0, 12));
@@ -62,8 +62,8 @@ namespace NModbus.UnitTests.IO
             int calls = 0;
             byte[][] source =
             {
-                new byte[] { 45, 63, 0, 0, 0, 6 },
-                new byte[] { 1 }.Concat(request.ProtocolDataUnit).ToArray()
+                new byte[] {45, 63, 0, 0, 0, 6},
+                new byte[] {1}.Concat(request.ProtocolDataUnit).ToArray()
             };
 
             mock.Setup(s => s.Read(It.Is<byte[]>(x => x.Length == 6), 0, 6))
@@ -74,7 +74,7 @@ namespace NModbus.UnitTests.IO
                 });
 
             Assert.Equal(
-                new byte[] { 45, 63, 0, 0, 0, 6, 1, 1, 0, 1, 0, 3 },
+                new byte[] {45, 63, 0, 0, 0, 6, 1, 1, 0, 1, 0, 3},
                 ModbusIpTransport.ReadRequestResponse(mock.Object, NullModbusLogger.Instance));
 
             mock.VerifyAll();
@@ -107,7 +107,7 @@ namespace NModbus.UnitTests.IO
         [Fact]
         public void GetNewTransactionId()
         {
-            var transport = new ModbusIpTransport(StreamResourceMock, new ModbusFactory(),  NullModbusLogger.Instance);
+            var transport = new ModbusIpTransport(StreamResourceMock, new ModbusFactory(), NullModbusLogger.Instance);
 
             Assert.Equal(1, transport.GetNewTransactionId());
             Assert.Equal(2, transport.GetNewTransactionId());
@@ -116,7 +116,7 @@ namespace NModbus.UnitTests.IO
         [Fact]
         public void OnShouldRetryResponse_ReturnsTrue_IfWithinThreshold()
         {
-            var transport = new ModbusIpTransport(StreamResourceMock, new ModbusFactory(),  NullModbusLogger.Instance);
+            var transport = new ModbusIpTransport(StreamResourceMock, new ModbusFactory(), NullModbusLogger.Instance);
             var request = new ReadCoilsInputsRequest(ModbusFunctionCodes.ReadCoils, 1, 1, 1);
             var response = new ReadCoilsInputsResponse(ModbusFunctionCodes.ReadCoils, 1, 1, null);
 
@@ -130,7 +130,7 @@ namespace NModbus.UnitTests.IO
         [Fact]
         public void OnShouldRetryResponse_ReturnsFalse_IfThresholdDisabled()
         {
-            var transport = new ModbusIpTransport(StreamResourceMock, new ModbusFactory(),  NullModbusLogger.Instance);
+            var transport = new ModbusIpTransport(StreamResourceMock, new ModbusFactory(), NullModbusLogger.Instance);
             var request = new ReadCoilsInputsRequest(ModbusFunctionCodes.ReadCoils, 1, 1, 1);
             var response = new ReadCoilsInputsResponse(ModbusFunctionCodes.ReadCoils, 1, 1, null);
 

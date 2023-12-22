@@ -20,7 +20,7 @@ namespace NModbus.UnitTests.Message
         {
             SlaveExceptionResponse response = new SlaveExceptionResponse(11, ModbusFunctionCodes.ReadCoils + Modbus.ExceptionOffset,
                 2);
-            Assert.Equal(new byte[] { response.FunctionCode, response.SlaveExceptionCode }, response.ProtocolDataUnit);
+            Assert.Equal(new byte[] {response.FunctionCode, response.SlaveExceptionCode}, response.ProtocolDataUnit);
         }
     }
 }

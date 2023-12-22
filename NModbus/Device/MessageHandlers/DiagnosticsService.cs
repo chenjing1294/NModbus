@@ -4,7 +4,7 @@
 
     public class DiagnosticsService : ModbusFunctionServiceBase<IModbusMessage>
     {
-        public DiagnosticsService() 
+        public DiagnosticsService()
             : base(ModbusFunctionCodes.Diagnostics)
         {
         }

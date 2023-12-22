@@ -12,7 +12,7 @@ namespace NModbus.UnitTests.Message
         public void ProtocolDataUnitReadCoilsRequest()
         {
             AbstractModbusMessage message = new ReadCoilsInputsRequest(ModbusFunctionCodes.ReadCoils, 1, 100, 9);
-            byte[] expectedResult = { ModbusFunctionCodes.ReadCoils, 0, 100, 0, 9 };
+            byte[] expectedResult = {ModbusFunctionCodes.ReadCoils, 0, 100, 0, 9};
             Assert.Equal(expectedResult, message.ProtocolDataUnit);
         }
 
@@ -20,7 +20,7 @@ namespace NModbus.UnitTests.Message
         public void MessageFrameReadCoilsRequest()
         {
             AbstractModbusMessage message = new ReadCoilsInputsRequest(ModbusFunctionCodes.ReadCoils, 1, 2, 3);
-            byte[] expectedMessageFrame = { 1, ModbusFunctionCodes.ReadCoils, 0, 2, 0, 3 };
+            byte[] expectedMessageFrame = {1, ModbusFunctionCodes.ReadCoils, 0, 2, 0, 3};
             Assert.Equal(expectedMessageFrame, message.MessageFrame);
         }
 
@@ -35,11 +35,11 @@ namespace NModbus.UnitTests.Message
             foreach (Type messageType in messageTypes)
             {
                 bool hasDirectOverride = messageType.GetMethod("ToString",
-                  BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly) != null;
+                    BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly) != null;
                 bool nonAbstractBaseHasOverride = messageType.BaseType != null &&
                                                   !messageType.BaseType.IsAbstract &&
                                                   messageType.BaseType.GetMethod("ToString",
-                                                    BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly) != null;
+                                                      BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly) != null;
                 Assert.True(hasDirectOverride || nonAbstractBaseHasOverride);
             }
         }

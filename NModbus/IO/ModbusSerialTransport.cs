@@ -39,7 +39,7 @@ namespace NModbus.IO
             byte[] frame = BuildMessageFrame(message);
 
             Logger.LogFrameTx(frame);
-            
+
             StreamResource.Write(frame, 0, frame.Length);
         }
 

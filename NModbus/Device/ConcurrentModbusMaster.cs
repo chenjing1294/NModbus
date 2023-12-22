@@ -32,7 +32,7 @@
 
         private Task WaitAsync(CancellationToken cancellationToken)
         {
-            int difference = (int)(_minInterval - _stopwatch.Elapsed).TotalMilliseconds;
+            int difference = (int) (_minInterval - _stopwatch.Elapsed).TotalMilliseconds;
 
             if (difference > 0)
             {
@@ -84,7 +84,7 @@
 
         public async Task<ushort[]> ReadInputRegistersAsync(byte slaveAddress, ushort startAddress, ushort numberOfPoints, ushort blockSize, CancellationToken cancellationToken)
         {
-            return await PerformFuncAsync(async ()  =>
+            return await PerformFuncAsync(async () =>
             {
                 List<ushort> registers = new List<ushort>(numberOfPoints);
 
@@ -108,7 +108,7 @@
                     }
 
                     //Perform this operation
-                    ushort[] registersFromThisRead = await _master.ReadInputRegistersAsync(slaveAddress, (ushort)(startAddress + soFar), (ushort)thisRead);
+                    ushort[] registersFromThisRead = await _master.ReadInputRegistersAsync(slaveAddress, (ushort) (startAddress + soFar), (ushort) thisRead);
 
                     //Add these to the result
                     registers.AddRange(registersFromThisRead);
@@ -118,7 +118,6 @@
                 }
 
                 return registers.ToArray();
-
             }, cancellationToken);
         }
 
@@ -148,7 +147,7 @@
                     }
 
                     //Perform this operation
-                    ushort[] registersFromThisRead = await _master.ReadHoldingRegistersAsync(slaveAddress, (ushort)(startAddress + soFar), (ushort)thisRead);
+                    ushort[] registersFromThisRead = await _master.ReadHoldingRegistersAsync(slaveAddress, (ushort) (startAddress + soFar), (ushort) thisRead);
 
                     //Add these to the result
                     registers.AddRange(registersFromThisRead);
@@ -158,7 +157,6 @@
                 }
 
                 return registers.ToArray();
-
             }, cancellationToken);
         }
 
@@ -188,8 +186,7 @@
 
                     soFar += thisWrite;
                 }
-
-            }, cancellationToken);  
+            }, cancellationToken);
         }
 
         public Task WriteSingleRegisterAsync(byte slaveAddress, ushort address, ushort value, CancellationToken cancellationToken)
@@ -199,7 +196,7 @@
 
         public Task WriteCoilsAsync(byte slaveAddress, ushort startAddress, bool[] data, CancellationToken cancellationToken)
         {
-            return PerformAsync(() => _master.WriteMultipleCoilsAsync(slaveAddress, startAddress, data),  cancellationToken);
+            return PerformAsync(() => _master.WriteMultipleCoilsAsync(slaveAddress, startAddress, data), cancellationToken);
         }
 
         public Task<bool[]> ReadCoilsAsync(byte slaveAddress, ushort startAddress, ushort number,
@@ -228,5 +225,4 @@
             }
         }
     }
-
 }

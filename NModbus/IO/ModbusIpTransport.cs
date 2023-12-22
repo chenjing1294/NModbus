@@ -44,7 +44,7 @@ namespace NModbus.IO
             }
 
             logger.Debug($"MBAP header: {string.Join(", ", mbapHeader)}");
-            var frameLength = (ushort)IPAddress.HostToNetworkOrder(BitConverter.ToInt16(mbapHeader, 4));
+            var frameLength = (ushort) IPAddress.HostToNetworkOrder(BitConverter.ToInt16(mbapHeader, 4));
             logger.Debug($"{frameLength} bytes in PDU.");
 
             // read message
@@ -72,8 +72,8 @@ namespace NModbus.IO
 
         public static byte[] GetMbapHeader(IModbusMessage message)
         {
-            byte[] transactionId = BitConverter.GetBytes(IPAddress.HostToNetworkOrder((short)message.TransactionId));
-            byte[] length = BitConverter.GetBytes(IPAddress.HostToNetworkOrder((short)(message.ProtocolDataUnit.Length + 1)));
+            byte[] transactionId = BitConverter.GetBytes(IPAddress.HostToNetworkOrder((short) message.TransactionId));
+            byte[] length = BitConverter.GetBytes(IPAddress.HostToNetworkOrder((short) (message.ProtocolDataUnit.Length + 1)));
 
             var stream = new MemoryStream(7);
             stream.Write(transactionId, 0, transactionId.Length);
@@ -92,7 +92,7 @@ namespace NModbus.IO
         {
             lock (_transactionIdLock)
             {
-                _transactionId = _transactionId == ushort.MaxValue ? (ushort)1 : ++_transactionId;
+                _transactionId = _transactionId == ushort.MaxValue ? (ushort) 1 : ++_transactionId;
             }
 
             return _transactionId;
@@ -105,7 +105,7 @@ namespace NModbus.IO
             byte[] messageFrame = fullFrame.Slice(6, fullFrame.Length - 6).ToArray();
 
             IModbusMessage response = CreateResponse<T>(messageFrame);
-            response.TransactionId = (ushort)IPAddress.NetworkToHostOrder(BitConverter.ToInt16(mbapHeader, 0));
+            response.TransactionId = (ushort) IPAddress.NetworkToHostOrder(BitConverter.ToInt16(mbapHeader, 0));
 
             return response;
         }

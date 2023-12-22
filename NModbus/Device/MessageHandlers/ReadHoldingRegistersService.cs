@@ -5,7 +5,7 @@ namespace NModbus.Device.MessageHandlers
 {
     public class ReadHoldingRegistersService : ModbusFunctionServiceBase<ReadHoldingInputRegistersRequest>
     {
-        public ReadHoldingRegistersService() 
+        public ReadHoldingRegistersService()
             : base(ModbusFunctionCodes.ReadHoldingRegisters)
         {
         }

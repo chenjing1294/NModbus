@@ -29,7 +29,7 @@ namespace NModbus.Device
 #if TIMER
         private Timer _timer;
 #endif
-        public ModbusTcpSlaveNetwork(TcpListener tcpListener, IModbusFactory modbusFactory,  IModbusLogger logger)
+        public ModbusTcpSlaveNetwork(TcpListener tcpListener, IModbusFactory modbusFactory, IModbusLogger logger)
             : base(new EmptyTransport(modbusFactory), modbusFactory, logger)
         {
             if (tcpListener == null)
@@ -61,10 +61,7 @@ namespace NModbus.Device
         /// </summary>
         public ReadOnlyCollection<TcpClient> Masters
         {
-            get
-            {
-                return new ReadOnlyCollection<TcpClient>(_masters.Values.Select(mc => mc.TcpClient).ToList());
-            }
+            get { return new ReadOnlyCollection<TcpClient>(_masters.Values.Select(mc => mc.TcpClient).ToList()); }
         }
 
         /// <summary>
@@ -128,7 +125,7 @@ namespace NModbus.Device
                     }
                 }
                 catch (ObjectDisposedException) when (cancellationToken.IsCancellationRequested)
-                { 
+                {
                     //Swallow this
                 }
                 catch (InvalidOperationException)

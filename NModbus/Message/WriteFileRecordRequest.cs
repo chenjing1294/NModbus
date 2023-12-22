@@ -27,8 +27,8 @@ namespace NModbus.Message
 
         public void ValidateResponse(IModbusMessage response)
         {
-            var typedResponse = (WriteFileRecordResponse)response;
-            
+            var typedResponse = (WriteFileRecordResponse) response;
+
             if (Data.FileNumber != typedResponse.Data.FileNumber)
             {
                 string msg = $"Unexpected file number in response. Expected {Data.FileNumber}, received {typedResponse.Data.FileNumber}.";

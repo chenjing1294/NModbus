@@ -15,7 +15,7 @@ namespace NModbus.UnitTests.IO
         [Fact]
         public void BuildMessageFrame()
         {
-            byte[] expected = { 58, 48, 50, 48, 49, 48, 48, 48, 48, 48, 48, 48, 49, 70, 67, 13, 10 };
+            byte[] expected = {58, 48, 50, 48, 49, 48, 48, 48, 48, 48, 48, 48, 49, 70, 67, 13, 10};
             var request = new ReadCoilsInputsRequest(ModbusFunctionCodes.ReadCoils, 2, 0, 1);
             var actual = new ModbusAsciiTransport(StreamResource, new ModbusFactory(), NullModbusLogger.Instance)
                 .BuildMessageFrame(request);
@@ -39,7 +39,7 @@ namespace NModbus.UnitTests.IO
                     return 1;
                 });
 
-            Assert.Equal(new byte[] { 17, 1, 0, 19, 0, 37, 182 }, transport.ReadRequestResponse());
+            Assert.Equal(new byte[] {17, 1, 0, 19, 0, 37, 182}, transport.ReadRequestResponse());
             mock.VerifyAll();
         }
 
@@ -68,7 +68,7 @@ namespace NModbus.UnitTests.IO
         {
             var transport = new ModbusAsciiTransport(StreamResource, new ModbusFactory(), NullModbusLogger.Instance);
             var message = new ReadCoilsInputsRequest(ModbusFunctionCodes.ReadCoils, 17, 19, 37);
-            byte[] frame = { 17, ModbusFunctionCodes.ReadCoils, 0, 19, 0, 37, 182 };
+            byte[] frame = {17, ModbusFunctionCodes.ReadCoils, 0, 19, 0, 37, 182};
 
             Assert.True(transport.ChecksumsMatch(message, frame));
         }
@@ -78,7 +78,7 @@ namespace NModbus.UnitTests.IO
         {
             var transport = new ModbusAsciiTransport(StreamResource, new ModbusFactory(), NullModbusLogger.Instance);
             var message = new ReadCoilsInputsRequest(ModbusFunctionCodes.ReadCoils, 17, 19, 37);
-            byte[] frame = { 17, ModbusFunctionCodes.ReadCoils, 0, 19, 0, 37, 181 };
+            byte[] frame = {17, ModbusFunctionCodes.ReadCoils, 0, 19, 0, 37, 181};
 
             Assert.False(transport.ChecksumsMatch(message, frame));
         }

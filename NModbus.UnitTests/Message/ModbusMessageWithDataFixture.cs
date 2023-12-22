@@ -20,7 +20,7 @@ namespace NModbus.UnitTests.Message
         {
             AbstractModbusMessageWithData<DiscreteCollection> message = new ReadCoilsInputsResponse(ModbusFunctionCodes.ReadCoils, 1, 2,
                 new DiscreteCollection(true));
-            byte[] expectedResult = { 1, 2, 1 };
+            byte[] expectedResult = {1, 2, 1};
             Assert.Equal(expectedResult, message.ProtocolDataUnit);
         }
 

@@ -18,7 +18,7 @@ namespace NModbus.Device
         ///     Gets the Modbus Transport.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
-        IModbusSerialTransport IModbusSerialMaster.Transport => (IModbusSerialTransport)Transport;
+        IModbusSerialTransport IModbusSerialMaster.Transport => (IModbusSerialTransport) Transport;
 
         /// <summary>
         ///     Serial Line only.

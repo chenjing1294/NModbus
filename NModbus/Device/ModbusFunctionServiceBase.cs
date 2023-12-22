@@ -35,7 +35,7 @@ namespace NModbus.Device
         public abstract int GetRtuRequestBytesToRead(byte[] frameStart);
 
         public abstract int GetRtuResponseBytesToRead(byte[] frameStart);
-       
+
         protected abstract IModbusMessage Handle(TRequest request, ISlaveDataStore dataStore);
 
         protected static T CreateModbusMessage<T>(byte[] frame)
@@ -44,7 +44,7 @@ namespace NModbus.Device
             IModbusMessage message = new T();
             message.Initialize(frame);
 
-            return (T)message;
+            return (T) message;
         }
     }
 }

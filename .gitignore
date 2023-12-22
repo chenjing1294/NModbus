@@ -232,3 +232,12 @@ _Pvt_Extensions
 /NModbus.Serial/log.txt
 _site/
 NModbus.Serial/api/
+
+
+bin/
+obj/
+.idea/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+/.vs/

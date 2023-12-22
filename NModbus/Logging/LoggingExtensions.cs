@@ -41,6 +41,7 @@ namespace NModbus.Logging
         #endregion
 
         #region Func Logging
+
         public static void Log(this IModbusLogger logger, LoggingLevel level, Func<string> messageFactory)
         {
             if (logger.ShouldLog(level))
@@ -113,6 +114,6 @@ namespace NModbus.Logging
             logger.LogFrame("IR", "ir", frame);
         }
 
-        #endregion  
+        #endregion
     }
 }

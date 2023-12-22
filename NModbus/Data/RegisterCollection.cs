@@ -25,7 +25,7 @@ namespace NModbus.Data
         /// </summary>
         /// <param name="bytes">Array for register collection.</param>
         public RegisterCollection(byte[] bytes)
-            : this((IList<ushort>)ModbusUtility.NetworkBytesToHostUInt16(bytes))
+            : this((IList<ushort>) ModbusUtility.NetworkBytesToHostUInt16(bytes))
         {
         }
 
@@ -34,7 +34,7 @@ namespace NModbus.Data
         /// </summary>
         /// <param name="registers">Array for register collection.</param>
         public RegisterCollection(params ushort[] registers)
-            : this((IList<ushort>)registers)
+            : this((IList<ushort>) registers)
         {
         }
 
@@ -55,7 +55,7 @@ namespace NModbus.Data
 
                 foreach (ushort register in this)
                 {
-                    var b = BitConverter.GetBytes((ushort)IPAddress.HostToNetworkOrder((short)register));
+                    var b = BitConverter.GetBytes((ushort) IPAddress.HostToNetworkOrder((short) register));
                     bytes.Write(b, 0, b.Length);
                 }
 
@@ -66,7 +66,7 @@ namespace NModbus.Data
         /// <summary>
         ///     Gets the byte count.
         /// </summary>
-        public byte ByteCount => (byte)(Count * 2);
+        public byte ByteCount => (byte) (Count * 2);
 
         /// <summary>
         ///     Returns a <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" />.

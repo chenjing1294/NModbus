@@ -32,8 +32,8 @@ namespace Modbus.IntegrationTests.CustomMessages
                 List<byte> pdu = new List<byte>();
 
                 pdu.Add(FunctionCode);
-                pdu.AddRange(BitConverter.GetBytes(IPAddress.HostToNetworkOrder((short)StartAddress)));
-                pdu.AddRange(BitConverter.GetBytes(IPAddress.HostToNetworkOrder((short)NumberOfPoints)));
+                pdu.AddRange(BitConverter.GetBytes(IPAddress.HostToNetworkOrder((short) StartAddress)));
+                pdu.AddRange(BitConverter.GetBytes(IPAddress.HostToNetworkOrder((short) NumberOfPoints)));
 
                 return pdu.ToArray();
             }
@@ -83,8 +83,8 @@ namespace Modbus.IntegrationTests.CustomMessages
 
             SlaveAddress = frame[0];
             FunctionCode = frame[1];
-            StartAddress = (ushort)IPAddress.NetworkToHostOrder(BitConverter.ToInt16(frame, 2));
-            NumberOfPoints = (ushort)IPAddress.NetworkToHostOrder(BitConverter.ToInt16(frame, 4));
+            StartAddress = (ushort) IPAddress.NetworkToHostOrder(BitConverter.ToInt16(frame, 2));
+            NumberOfPoints = (ushort) IPAddress.NetworkToHostOrder(BitConverter.ToInt16(frame, 4));
         }
     }
 }

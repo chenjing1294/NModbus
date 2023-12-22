@@ -5,7 +5,7 @@ namespace NModbus.IO
 {
     internal class EmptyTransport : ModbusTransport
     {
-        public EmptyTransport(IModbusFactory modbusFactory) 
+        public EmptyTransport(IModbusFactory modbusFactory)
             : base(modbusFactory, NullModbusLogger.Instance)
         {
         }
@@ -34,9 +34,5 @@ namespace NModbus.IO
         {
             throw new NotImplementedException();
         }
-
-        
-
-        
     }
 }

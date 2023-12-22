@@ -25,7 +25,7 @@ namespace NModbus.UnitTests.Data
         public void NetworkBytes()
         {
             DiscreteCollection col = new DiscreteCollection(true, true);
-            Assert.Equal(new byte[] { 3 }, col.NetworkBytes);
+            Assert.Equal(new byte[] {3}, col.NetworkBytes);
         }
 
         [Fact]
@@ -68,14 +68,14 @@ namespace NModbus.UnitTests.Data
         [Fact]
         public void CreateNewDiscreteCollectionFromBytesParams_NullArray()
         {
-            Assert.Throws<ArgumentNullException>(() => new DiscreteCollection((byte[])null));
+            Assert.Throws<ArgumentNullException>(() => new DiscreteCollection((byte[]) null));
         }
 
         [Fact]
         public void CreateNewDiscreteCollectionFromBytesParamsOrder()
         {
             DiscreteCollection col = new DiscreteCollection(194);
-            Assert.Equal(new bool[] { false, true, false, false, false, false, true, true }, col.ToArray());
+            Assert.Equal(new bool[] {false, true, false, false, false, false, true, true}, col.ToArray());
         }
 
         [Fact]
@@ -84,7 +84,7 @@ namespace NModbus.UnitTests.Data
             DiscreteCollection col = new DiscreteCollection(157, 7);
             Assert.Equal(
                 new bool[]
-                { true, false, true, true, true, false, false, true, true, true, true, false, false, false, false, false },
+                    {true, false, true, true, true, false, false, true, true, true, true, false, false, false, false, false},
                 col.ToArray());
         }
 

@@ -5,7 +5,7 @@ namespace NModbus.Device.MessageHandlers
 {
     public class ReadCoilsService : ModbusFunctionServiceBase<ReadCoilsInputsRequest>
     {
-        public ReadCoilsService() 
+        public ReadCoilsService()
             : base(ModbusFunctionCodes.ReadCoils)
         {
         }
@@ -32,8 +32,8 @@ namespace NModbus.Device.MessageHandlers
             DiscreteCollection data = new DiscreteCollection(discretes);
 
             return new ReadCoilsInputsResponse(
-                request.FunctionCode, 
-                request.SlaveAddress, 
+                request.FunctionCode,
+                request.SlaveAddress,
                 data.ByteCount, data);
         }
     }

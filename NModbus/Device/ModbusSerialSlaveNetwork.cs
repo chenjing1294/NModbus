@@ -14,7 +14,7 @@ namespace NModbus.Device
         private readonly IModbusSerialTransport _serialTransport;
         private readonly IModbusFactory _modbusFactory;
 
-        public ModbusSerialSlaveNetwork(IModbusSerialTransport transport, IModbusFactory modbusFactory, IModbusLogger logger) 
+        public ModbusSerialSlaveNetwork(IModbusSerialTransport transport, IModbusFactory modbusFactory, IModbusLogger logger)
             : base(transport, modbusFactory, logger)
         {
             _serialTransport = transport ?? throw new ArgumentNullException(nameof(transport));
@@ -65,7 +65,7 @@ namespace NModbus.Device
                     Logger.Trace($"Timeout Exception encountered while listening for requests - {te.Message}");
                     SerialTransport.DiscardInBuffer();
                 }
-                catch(InvalidOperationException)
+                catch (InvalidOperationException)
                 {
                     // when the underlying transport is disposed
                     break;

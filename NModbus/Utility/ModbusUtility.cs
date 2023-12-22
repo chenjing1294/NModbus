@@ -133,7 +133,7 @@ namespace NModbus.Utility
 
             for (int i = 0; i < result.Length; i++)
             {
-                result[i] = (ushort)IPAddress.NetworkToHostOrder(BitConverter.ToInt16(networkBytes, i * 2));
+                result[i] = (ushort) IPAddress.NetworkToHostOrder(BitConverter.ToInt16(networkBytes, i * 2));
             }
 
             return result;
@@ -185,7 +185,7 @@ namespace NModbus.Utility
                 lrc += b;
             }
 
-            lrc = (byte)((lrc ^ 0xFF) + 1);
+            lrc = (byte) ((lrc ^ 0xFF) + 1);
 
             return lrc;
         }
@@ -206,7 +206,7 @@ namespace NModbus.Utility
 
             foreach (byte b in data)
             {
-                byte tableIndex = (byte)(crc ^ b);
+                byte tableIndex = (byte) (crc ^ b);
                 crc >>= 8;
                 crc ^= CrcTable[tableIndex];
             }

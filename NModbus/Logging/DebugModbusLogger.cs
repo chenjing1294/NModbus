@@ -11,7 +11,7 @@ namespace NModbus.Logging
         private const int LevelColumnSize = 15;
         private static readonly string BlankHeader = Environment.NewLine + new string(' ', LevelColumnSize);
 
-        public DebugModbusLogger(LoggingLevel minimumLoggingLevel = LoggingLevel.Debug) 
+        public DebugModbusLogger(LoggingLevel minimumLoggingLevel = LoggingLevel.Debug)
             : base(minimumLoggingLevel)
         {
         }

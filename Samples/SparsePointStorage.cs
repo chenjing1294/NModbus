@@ -4,7 +4,6 @@ using NModbus;
 
 namespace Samples
 {
-
     public class SlaveStorage : ISlaveDataStore
     {
         private readonly SparsePointSource<bool> _coilDiscretes;
@@ -151,6 +150,4 @@ namespace Samples
 
         Write
     }
-
-
 }

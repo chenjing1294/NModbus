@@ -5,7 +5,7 @@ namespace NModbus.Device.MessageHandlers
 {
     public class ReadInputsService : ModbusFunctionServiceBase<ReadCoilsInputsRequest>
     {
-        public ReadInputsService() 
+        public ReadInputsService()
             : base(ModbusFunctionCodes.ReadInputs)
         {
         }

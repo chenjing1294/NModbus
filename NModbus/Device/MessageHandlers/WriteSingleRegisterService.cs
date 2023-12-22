@@ -5,7 +5,7 @@ namespace NModbus.Device.MessageHandlers
 {
     public class WriteSingleRegisterService : ModbusFunctionServiceBase<WriteSingleRegisterRequestResponse>
     {
-        public WriteSingleRegisterService() 
+        public WriteSingleRegisterService()
             : base(ModbusFunctionCodes.WriteSingleRegister)
         {
         }

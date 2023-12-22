@@ -5,7 +5,7 @@ using System.Linq;
 using NModbus.Extensions;
 using NModbus.Message;
 
-namespace NModbus.Device 
+namespace NModbus.Device
 {
     public class ModbusSlave : IModbusSlave
     {
@@ -70,7 +70,7 @@ namespace NModbus.Device
             {
                 //Okay - this is no beuno.
                 response = new SlaveExceptionResponse(request.SlaveAddress,
-                    (byte)(Modbus.ExceptionOffset + request.FunctionCode),
+                    (byte) (Modbus.ExceptionOffset + request.FunctionCode),
                     SlaveExceptionCodes.SlaveDeviceFailure);
             }
 #endif

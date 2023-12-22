@@ -3,7 +3,6 @@ using Xunit;
 
 namespace NModbus.UnitTests.Data
 {
-
     public class DefaultPointSourceFixture
     {
         [Theory]
@@ -15,10 +14,9 @@ namespace NModbus.UnitTests.Data
         {
             IPointSource<int> points = new DefaultPointSource<int>();
 
-            points.WritePoints(startAddress, new []{ value });
+            points.WritePoints(startAddress, new[] {value});
 
             Assert.Equal(value, points.ReadPoints(startAddress, 1)[0]);
         }
-
     }
 }

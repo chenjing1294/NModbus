@@ -17,8 +17,8 @@ namespace NModbus.UnitTests.Utility
         [Fact]
         public void GetAsciiBytesFromBytes()
         {
-            byte[] buf = { 2, 5 };
-            byte[] expectedResult = { 48, 50, 48, 53 };
+            byte[] buf = {2, 5};
+            byte[] expectedResult = {48, 50, 48, 53};
             byte[] result = ModbusUtility.GetAsciiBytes(buf);
             Assert.Equal(expectedResult, result);
         }
@@ -26,8 +26,8 @@ namespace NModbus.UnitTests.Utility
         [Fact]
         public void GetAsciiBytesFromUshorts()
         {
-            ushort[] buf = { 300, 400 };
-            byte[] expectedResult = { 48, 49, 50, 67, 48, 49, 57, 48 };
+            ushort[] buf = {300, 400};
+            byte[] expectedResult = {48, 49, 50, 67, 48, 49, 57, 48};
             byte[] result = ModbusUtility.GetAsciiBytes(buf);
             Assert.Equal(expectedResult, result);
         }
@@ -35,13 +35,13 @@ namespace NModbus.UnitTests.Utility
         [Fact]
         public void HexToBytes()
         {
-            Assert.Equal(new byte[] { 255 }, ModbusUtility.HexToBytes("FF"));
+            Assert.Equal(new byte[] {255}, ModbusUtility.HexToBytes("FF"));
         }
 
         [Fact]
         public void HexToBytes2()
         {
-            Assert.Equal(new byte[] { 204, 255 }, ModbusUtility.HexToBytes("CCFF"));
+            Assert.Equal(new byte[] {204, 255}, ModbusUtility.HexToBytes("CCFF"));
         }
 
         [Fact]
@@ -65,21 +65,21 @@ namespace NModbus.UnitTests.Utility
         [Fact]
         public void CalculateCrc()
         {
-            byte[] result = ModbusUtility.CalculateCrc(new byte[] { 1, 1 });
-            Assert.Equal(new byte[] { 193, 224 }, result);
+            byte[] result = ModbusUtility.CalculateCrc(new byte[] {1, 1});
+            Assert.Equal(new byte[] {193, 224}, result);
         }
 
         [Fact]
         public void CalculateCrc2()
         {
-            byte[] result = ModbusUtility.CalculateCrc(new byte[] { 2, 1, 5, 0 });
-            Assert.Equal(new byte[] { 83, 12 }, result);
+            byte[] result = ModbusUtility.CalculateCrc(new byte[] {2, 1, 5, 0});
+            Assert.Equal(new byte[] {83, 12}, result);
         }
 
         [Fact]
         public void CalculateCrcEmpty()
         {
-            Assert.Equal(new byte[] { 255, 255 }, ModbusUtility.CalculateCrc(new byte[] { }));
+            Assert.Equal(new byte[] {255, 255}, ModbusUtility.CalculateCrc(new byte[] { }));
         }
 
         [Fact]
@@ -92,7 +92,7 @@ namespace NModbus.UnitTests.Utility
         public void CalculateLrc()
         {
             ReadCoilsInputsRequest request = new ReadCoilsInputsRequest(ModbusFunctionCodes.ReadCoils, 1, 1, 10);
-            Assert.Equal(243, ModbusUtility.CalculateLrc(new byte[] { 1, 1, 0, 1, 0, 10 }));
+            Assert.Equal(243, ModbusUtility.CalculateLrc(new byte[] {1, 1, 0, 1, 0, 10}));
         }
 
         [Fact]
@@ -100,7 +100,7 @@ namespace NModbus.UnitTests.Utility
         {
             // : 02 01 0000 0001 FC
             ReadCoilsInputsRequest request = new ReadCoilsInputsRequest(ModbusFunctionCodes.ReadCoils, 2, 0, 1);
-            Assert.Equal(252, ModbusUtility.CalculateLrc(new byte[] { 2, 1, 0, 0, 0, 1 }));
+            Assert.Equal(252, ModbusUtility.CalculateLrc(new byte[] {2, 1, 0, 0, 0, 1}));
         }
 
         [Fact]
@@ -118,7 +118,7 @@ namespace NModbus.UnitTests.Utility
         [Fact]
         public void NetworkBytesToHostUInt16()
         {
-            Assert.Equal(new ushort[] { 1, 2 }, ModbusUtility.NetworkBytesToHostUInt16(new byte[] { 0, 1, 0, 2 }));
+            Assert.Equal(new ushort[] {1, 2}, ModbusUtility.NetworkBytesToHostUInt16(new byte[] {0, 1, 0, 2}));
         }
 
         [Fact]
@@ -130,7 +130,7 @@ namespace NModbus.UnitTests.Utility
         [Fact]
         public void NetworkBytesToHostUInt16OddNumberOfBytes()
         {
-            Assert.Throws<FormatException>(() => ModbusUtility.NetworkBytesToHostUInt16(new byte[] { 1 }));
+            Assert.Throws<FormatException>(() => ModbusUtility.NetworkBytesToHostUInt16(new byte[] {1}));
         }
 
         [Fact]
@@ -160,10 +160,10 @@ namespace NModbus.UnitTests.Utility
         [Fact]
         public void GetUInt32()
         {
-            Assert.Equal((uint)0, ModbusUtility.GetUInt32(0, 0));
-            Assert.Equal((uint)1, ModbusUtility.GetUInt32(0, 1));
-            Assert.Equal((uint)45, ModbusUtility.GetUInt32(0, 45));
-            Assert.Equal((uint)65536, ModbusUtility.GetUInt32(1, 0));
+            Assert.Equal((uint) 0, ModbusUtility.GetUInt32(0, 0));
+            Assert.Equal((uint) 1, ModbusUtility.GetUInt32(0, 1));
+            Assert.Equal((uint) 45, ModbusUtility.GetUInt32(0, 45));
+            Assert.Equal((uint) 65536, ModbusUtility.GetUInt32(1, 0));
         }
     }
 }

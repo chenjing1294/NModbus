@@ -61,7 +61,7 @@ namespace NModbus.Data
         {
             BeforeWrite?.Invoke(this, new PointEventArgs<T>(startAddress, points));
             WritePoints(startAddress, points);
-            AfterWrite?.Invoke(this, new PointEventArgs(startAddress, (ushort)points.Length));
+            AfterWrite?.Invoke(this, new PointEventArgs(startAddress, (ushort) points.Length));
         }
     }
 }

@@ -29,7 +29,7 @@ namespace NModbus.IO
             byte functionCode = frameStart[1];
 
             IModbusFunctionService service = ModbusFactory.GetFunctionServiceOrThrow(functionCode);
-                
+
             return service.GetRtuRequestBytesToRead(frameStart);
         }
 
@@ -55,12 +55,12 @@ namespace NModbus.IO
             while (numBytesReadTotal != count)
             {
                 int numBytesRead = StreamResource.Read(frameBytes, numBytesReadTotal, count - numBytesReadTotal);
-                
+
                 if (numBytesRead == 0)
                 {
                     throw new IOException("Read resulted in 0 bytes returned.");
                 }
-                
+
                 numBytesReadTotal += numBytesRead;
             }
 

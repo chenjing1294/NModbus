@@ -22,7 +22,7 @@ namespace Modbus.IntegrationTests.CustomMessages
             _functionCode = functionCode;
             _slaveAddress = slaveAddress;
             _startAddress = startAddress;
-            _numberOfPoints = (ushort)data.Count;
+            _numberOfPoints = (ushort) data.Count;
             _byteCount = data.ByteCount;
             _data = data;
         }
@@ -46,8 +46,8 @@ namespace Modbus.IntegrationTests.CustomMessages
                 List<byte> pdu = new List<byte>();
 
                 pdu.Add(FunctionCode);
-                pdu.AddRange(BitConverter.GetBytes(IPAddress.HostToNetworkOrder((short)StartAddress)));
-                pdu.AddRange(BitConverter.GetBytes(IPAddress.HostToNetworkOrder((short)NumberOfPoints)));
+                pdu.AddRange(BitConverter.GetBytes(IPAddress.HostToNetworkOrder((short) StartAddress)));
+                pdu.AddRange(BitConverter.GetBytes(IPAddress.HostToNetworkOrder((short) NumberOfPoints)));
                 pdu.Add(ByteCount);
                 pdu.AddRange(Data.NetworkBytes);
 
@@ -111,8 +111,8 @@ namespace Modbus.IntegrationTests.CustomMessages
 
             SlaveAddress = frame[0];
             FunctionCode = frame[1];
-            StartAddress = (ushort)IPAddress.NetworkToHostOrder(BitConverter.ToInt16(frame, 2));
-            NumberOfPoints = (ushort)IPAddress.NetworkToHostOrder(BitConverter.ToInt16(frame, 4));
+            StartAddress = (ushort) IPAddress.NetworkToHostOrder(BitConverter.ToInt16(frame, 2));
+            NumberOfPoints = (ushort) IPAddress.NetworkToHostOrder(BitConverter.ToInt16(frame, 4));
             ByteCount = frame[6];
             Data = new RegisterCollection(frame.Skip(7).Take(ByteCount).ToArray());
         }

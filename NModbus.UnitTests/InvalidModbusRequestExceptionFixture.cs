@@ -58,7 +58,7 @@ namespace NModbus.UnitTests
                 formatter.Serialize(stream, e);
                 stream.Position = 0;
 
-                var e2 = (InvalidModbusRequestException)formatter.Deserialize(stream);
+                var e2 = (InvalidModbusRequestException) formatter.Deserialize(stream);
                 Assert.NotNull(e2);
                 Assert.Equal(SlaveExceptionCodes.SlaveDeviceBusy, e2.ExceptionCode);
                 Assert.Equal($"Modbus exception code {SlaveExceptionCodes.SlaveDeviceBusy}.", e2.Message);

@@ -16,7 +16,7 @@ namespace NModbus
         /// <summary>
         /// The "built-in" message handlers.
         /// </summary>
-        private static readonly IModbusFunctionService[] BuiltInFunctionServices = 
+        private static readonly IModbusFunctionService[] BuiltInFunctionServices =
         {
             new ReadCoilsService(),
             new ReadInputsService(),
@@ -50,8 +50,8 @@ namespace NModbus
         /// <param name="includeBuiltIn">If true, the built in function services are included. Otherwise, all function services will come from the functionService parameter.</param>
         /// <param name="logger">Logger</param>
         public ModbusFactory(
-            IEnumerable<IModbusFunctionService> functionServices = null, 
-            bool includeBuiltIn = true, 
+            IEnumerable<IModbusFunctionService> functionServices = null,
+            bool includeBuiltIn = true,
             IModbusLogger logger = null)
         {
             Logger = logger ?? NullModbusLogger.Instance;

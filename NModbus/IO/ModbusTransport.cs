@@ -29,7 +29,7 @@ namespace NModbus.IO
             Logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        internal ModbusTransport(IStreamResource streamResource, IModbusFactory modbusFactory, IModbusLogger logger) 
+        internal ModbusTransport(IStreamResource streamResource, IModbusFactory modbusFactory, IModbusLogger logger)
             : this(modbusFactory, logger)
         {
             _streamResource = streamResource ?? throw new ArgumentNullException(nameof(streamResource));
@@ -156,8 +156,7 @@ namespace NModbus.IO
                             {
                                 readAgain = true;
                             }
-                        }
-                        while (readAgain);
+                        } while (readAgain);
                     }
 
                     ValidateResponse(message, response);
@@ -186,6 +185,7 @@ namespace NModbus.IO
                     {
                         throw;
                     }
+
                     if (e is FormatException ||
                         e is NotImplementedException ||
                         e is TimeoutException ||
@@ -206,10 +206,9 @@ namespace NModbus.IO
                         throw;
                     }
                 }
-            }
-            while (!success);
+            } while (!success);
 
-            return (T)response;
+            return (T) response;
         }
 
         public virtual IModbusMessage CreateResponse<T>(byte[] frame)

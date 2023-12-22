@@ -22,6 +22,7 @@ namespace NModbus.SerialPortStream
             get => _serialPortStream.ReadTimeout;
             set => _serialPortStream.ReadTimeout = value;
         }
+
         public int WriteTimeout
         {
             get => _serialPortStream.WriteTimeout;

@@ -39,7 +39,7 @@ namespace NModbus.Message
 
         public void ValidateResponse(IModbusMessage response)
         {
-            var typedResponse = (WriteSingleRegisterRequestResponse)response;
+            var typedResponse = (WriteSingleRegisterRequestResponse) response;
 
             if (StartAddress != typedResponse.StartAddress)
             {
@@ -56,8 +56,8 @@ namespace NModbus.Message
 
         protected override void InitializeUnique(byte[] frame)
         {
-            StartAddress = (ushort)IPAddress.NetworkToHostOrder(BitConverter.ToInt16(frame, 2));
-            Data = new RegisterCollection((ushort)IPAddress.NetworkToHostOrder(BitConverter.ToInt16(frame, 4)));
+            StartAddress = (ushort) IPAddress.NetworkToHostOrder(BitConverter.ToInt16(frame, 2));
+            Data = new RegisterCollection((ushort) IPAddress.NetworkToHostOrder(BitConverter.ToInt16(frame, 4)));
         }
     }
 }

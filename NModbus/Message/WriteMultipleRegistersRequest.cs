@@ -17,8 +17,8 @@ namespace NModbus.Message
             : base(slaveAddress, ModbusFunctionCodes.WriteMultipleRegisters)
         {
             StartAddress = startAddress;
-            NumberOfPoints = (ushort)data.Count;
-            ByteCount = (byte)(data.Count * 2);
+            NumberOfPoints = (ushort) data.Count;
+            ByteCount = (byte) (data.Count * 2);
             Data = data;
         }
 
@@ -60,7 +60,7 @@ namespace NModbus.Message
 
         public void ValidateResponse(IModbusMessage response)
         {
-            var typedResponse = (WriteMultipleRegistersResponse)response;
+            var typedResponse = (WriteMultipleRegistersResponse) response;
 
             if (StartAddress != typedResponse.StartAddress)
             {
@@ -82,8 +82,8 @@ namespace NModbus.Message
                 throw new FormatException("Message frame does not contain enough bytes.");
             }
 
-            StartAddress = (ushort)IPAddress.NetworkToHostOrder(BitConverter.ToInt16(frame, 2));
-            NumberOfPoints = (ushort)IPAddress.NetworkToHostOrder(BitConverter.ToInt16(frame, 4));
+            StartAddress = (ushort) IPAddress.NetworkToHostOrder(BitConverter.ToInt16(frame, 2));
+            NumberOfPoints = (ushort) IPAddress.NetworkToHostOrder(BitConverter.ToInt16(frame, 4));
             ByteCount = frame[6];
             Data = new RegisterCollection(frame.Slice(7, ByteCount).ToArray());
         }

@@ -15,6 +15,7 @@ namespace NModbus.Data
         ///     Number of bits per byte.
         /// </summary>
         private const int BitsPerByte = 8;
+
         private readonly List<bool> _discretes;
 
         /// <summary>
@@ -30,7 +31,7 @@ namespace NModbus.Data
         /// </summary>
         /// <param name="bits">Array for discrete collection.</param>
         public DiscreteCollection(params bool[] bits)
-            : this((IList<bool>)bits)
+            : this((IList<bool>) bits)
         {
         }
 
@@ -94,7 +95,7 @@ namespace NModbus.Data
                 {
                     if (_discretes[index])
                     {
-                        bytes[index / BitsPerByte] |= (byte)(1 << (index % BitsPerByte));
+                        bytes[index / BitsPerByte] |= (byte) (1 << (index % BitsPerByte));
                     }
                 }
 
@@ -105,7 +106,7 @@ namespace NModbus.Data
         /// <summary>
         ///     Gets the byte count.
         /// </summary>
-        public byte ByteCount => (byte)((Count + 7) / 8);
+        public byte ByteCount => (byte) ((Count + 7) / 8);
 
         /// <summary>
         ///     Returns a <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" />.

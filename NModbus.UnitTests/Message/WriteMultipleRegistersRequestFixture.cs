@@ -24,7 +24,7 @@ namespace NModbus.UnitTests.Message
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 new WriteMultipleRegistersRequest(1, 2,
-                MessageUtility.CreateDefaultCollection<RegisterCollection, ushort>(3, Modbus.MaximumRegisterRequestResponseSize + 1)));
+                    MessageUtility.CreateDefaultCollection<RegisterCollection, ushort>(3, Modbus.MaximumRegisterRequestResponseSize + 1)));
         }
 
         [Fact]

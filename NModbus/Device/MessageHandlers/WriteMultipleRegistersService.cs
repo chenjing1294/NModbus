@@ -3,10 +3,10 @@ using NModbus.Message;
 
 namespace NModbus.Device.MessageHandlers
 {
-    public class WriteMultipleRegistersService 
+    public class WriteMultipleRegistersService
         : ModbusFunctionServiceBase<WriteMultipleRegistersRequest>
     {
-        public WriteMultipleRegistersService() 
+        public WriteMultipleRegistersService()
             : base(ModbusFunctionCodes.WriteMultipleRegisters)
         {
         }
