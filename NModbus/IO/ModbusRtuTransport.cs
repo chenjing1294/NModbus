@@ -114,9 +114,22 @@ namespace NModbus.IO
 
         public override byte[] ReadRequest()
         {
-            byte[] frameStart = Read(RequestFrameStartLength);
-            byte[] frameEnd = Read(RequestBytesToRead(frameStart));
-            byte[] frame = frameStart.Concat(frameEnd).ToArray();
+            byte[] frame = null;
+            byte[] bytes = Read(2); //读取从设备地址和功能码
+            byte functionCode = bytes[1];
+            switch (functionCode)
+            {
+                case ModbusFunctionCodes.ReportSlaveId:
+                    byte[] read = Read(RequestBytesToRead(bytes));
+                    frame = bytes.Concat(read).ToArray();
+                    break;
+                default:
+                    byte[] frameStart = Read(RequestFrameStartLength - 2);
+                    frameStart = bytes.Concat(frameStart).ToArray();
+                    byte[] frameEnd = Read(RequestBytesToRead(frameStart));
+                    frame = frameStart.Concat(frameEnd).ToArray();
+                    break;
+            }
 
             Logger.LogFrameRx(frame);
 

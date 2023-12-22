@@ -60,7 +60,7 @@ namespace NModbus.Device
                             // write response
                             byte[] responseFrame = Transport.BuildMessageFrame(response);
 
-                            Logger.LogFrameTx(frame);
+                            Logger.LogFrameTx(responseFrame);
 
                             await _udpClient.SendAsync(responseFrame, responseFrame.Length, masterEndPoint)
                                 .ConfigureAwait(false);
@@ -73,7 +73,7 @@ namespace NModbus.Device
                 }
                 catch (SocketException se)
                 {
-                    // this hapens when slave stops
+                    // this happens when slave stops
                     if (se.SocketErrorCode != SocketError.Interrupted)
                     {
                         throw;

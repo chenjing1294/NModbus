@@ -3,7 +3,6 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using NModbus.Logging;
-using NModbus.Message;
 
 namespace NModbus.Device
 {
@@ -48,11 +47,11 @@ namespace NModbus.Device
 
                     if (response == null)
                     {
-                        _serialTransport.IgnoreResponse();
+                        // _serialTransport.IgnoreResponse();
                     }
                     else
                     {
-                        Transport.Write(response);
+                        SerialTransport.Write(response);
                     }
                 }
                 catch (IOException ioe)

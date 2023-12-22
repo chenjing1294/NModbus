@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using NModbus.Unme.Common;
@@ -17,6 +18,7 @@ namespace NModbus.IO
         private UdpClient _udpClient;
         private readonly byte[] _buffer = new byte[MaxBufferSize];
         private int _bufferOffset;
+        private IPEndPoint _masterEndPoint = null;
 
         public UdpClientAdapter(UdpClient udpClient)
         {
@@ -56,35 +58,30 @@ namespace NModbus.IO
 
             if (offset < 0)
             {
-                throw new ArgumentOutOfRangeException(
-                    nameof(offset),
-                    "Argument offset must be greater than or equal to 0.");
+                throw new ArgumentOutOfRangeException(nameof(offset), "Argument offset must be greater than or equal to 0.");
             }
 
             if (offset > buffer.Length)
             {
-                throw new ArgumentOutOfRangeException(
-                    nameof(offset),
-                    "Argument offset cannot be greater than the length of buffer.");
+                throw new ArgumentOutOfRangeException(nameof(offset), "Argument offset cannot be greater than the length of buffer.");
             }
 
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException(
-                    nameof(count),
-                    "Argument count must be greater than or equal to 0.");
+                throw new ArgumentOutOfRangeException(nameof(count), "Argument count must be greater than or equal to 0.");
             }
 
             if (count > buffer.Length - offset)
             {
-                throw new ArgumentOutOfRangeException(
-                    nameof(count),
-                    "Argument count cannot be greater than the length of buffer minus offset.");
+                throw new ArgumentOutOfRangeException(nameof(count), "Argument count cannot be greater than the length of buffer minus offset.");
             }
 
             if (_bufferOffset == 0)
             {
-                _bufferOffset = _udpClient.Client.Receive(_buffer);
+                // _bufferOffset = _udpClient.Client.Receive(_buffer);
+                byte[] receive = _udpClient.Receive(ref _masterEndPoint);
+                _bufferOffset = receive.Length;
+                Buffer.BlockCopy(receive, 0, _buffer, 0, _bufferOffset);
             }
 
             if (_bufferOffset < count)
@@ -108,33 +105,27 @@ namespace NModbus.IO
 
             if (offset < 0)
             {
-                throw new ArgumentOutOfRangeException(
-                    nameof(offset),
-                    "Argument offset must be greater than or equal to 0.");
+                throw new ArgumentOutOfRangeException(nameof(offset), "Argument offset must be greater than or equal to 0.");
             }
 
             if (offset > buffer.Length)
             {
-                throw new ArgumentOutOfRangeException(
-                    nameof(offset),
-                    "Argument offset cannot be greater than the length of buffer.");
+                throw new ArgumentOutOfRangeException(nameof(offset), "Argument offset cannot be greater than the length of buffer.");
             }
 
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException(
-                    nameof(count),
-                    "Argument count must be greater than or equal to 0.");
+                throw new ArgumentOutOfRangeException(nameof(count), "Argument count must be greater than or equal to 0.");
             }
 
             if (count > buffer.Length - offset)
             {
-                throw new ArgumentOutOfRangeException(
-                    nameof(count),
-                    "Argument count cannot be greater than the length of buffer minus offset.");
+                throw new ArgumentOutOfRangeException(nameof(count), "Argument count cannot be greater than the length of buffer minus offset.");
             }
 
-            _udpClient.Client.Send(buffer.Skip(offset).Take(count).ToArray());
+            // _udpClient.Client.Send(buffer.Skip(offset).Take(count).ToArray());
+            byte[] bytes = buffer.Skip(offset).Take(count).ToArray();
+            _udpClient.Send(bytes, bytes.Length, _masterEndPoint);
         }
 
         public void Dispose()
