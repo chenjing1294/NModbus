@@ -29,6 +29,7 @@ namespace NModbus
             new WriteMultipleRegistersService(),
             new WriteFileRecordService(),
             new ReadWriteMultipleRegistersService(),
+            new ReportSlaveIdService()
         };
 
         private readonly IDictionary<byte, IModbusFunctionService> _functionServices;
@@ -103,6 +104,16 @@ namespace NModbus
             return new ModbusTcpSlaveNetwork(tcpListener, this, Logger);
         }
 
+        public IModbusSlaveNetwork CreateRtuSlaveNetwork(TcpListener tcpListener)
+        {
+            return new ModbusSerialOverTcpSlaveNetwork(tcpListener, this, Logger);
+        }
+
+        public IModbusSlaveNetwork CreateRtuSlaveNetwork(UdpClient client)
+        {
+            return new ModbusSerialOverUdpSlaveNetwork(client, this, Logger);
+        }
+
         public IModbusSlaveNetwork CreateSlaveNetwork(UdpClient client)
         {
             return new ModbusUdpSlaveNetwork(client, this, Logger);
@@ -137,31 +148,45 @@ namespace NModbus
             return new ModbusSerialMaster(transport);
         }
 
+        /// <summary>
+        /// Modbus UDP/IP
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
         public IModbusMaster CreateMaster(UdpClient client)
         {
             var adapter = new UdpClientAdapter(client);
-
             var transport = new ModbusIpTransport(adapter, this, Logger);
-
             return new ModbusIpMaster(transport);
         }
 
+        /// <summary>
+        /// Modbus TCP/IP
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
         public IModbusMaster CreateMaster(TcpClient client)
         {
             var adapter = new TcpClientAdapter(client);
-
             var transport = new ModbusIpTransport(adapter, this, Logger);
-
             return new ModbusIpMaster(transport);
         }
 
+        /// <summary>
+        /// Modbus RTU Over TCP/IP
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
         public IModbusMaster CreateMaster(Socket client)
         {
             var adapter = new SocketAdapter(client);
-
             var transport = new ModbusRtuTransport(adapter, this, Logger);
-
             return new ModbusSerialMaster(transport);
+        }
+
+        public IModbusRtuTransport CreateRtuOverUdpTransport(UdpClient udpClient)
+        {
+            return new ModbusRtuOverUdpTransport(new UdpClientAdapter(udpClient), this, Logger);
         }
 
         public IModbusFunctionService GetFunctionService(byte functionCode)

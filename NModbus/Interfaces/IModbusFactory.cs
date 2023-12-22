@@ -82,6 +82,20 @@ namespace NModbus
         IModbusTcpSlaveNetwork CreateSlaveNetwork(TcpListener tcpListener);
 
         /// <summary>
+        /// Modbus RTU Over TCP/IP
+        /// </summary>
+        /// <param name="tcpListener"></param>
+        /// <returns></returns>
+        IModbusSlaveNetwork CreateRtuSlaveNetwork(TcpListener tcpListener);
+
+        /// <summary>
+        /// Modbus RTU Over UDP/IP
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
+        IModbusSlaveNetwork CreateRtuSlaveNetwork(UdpClient client);
+
+        /// <summary>
         /// Creates a UDP modbus slave network.
         /// </summary>
         /// <param name="client"></param>

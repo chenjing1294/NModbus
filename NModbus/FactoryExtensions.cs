@@ -30,7 +30,6 @@ namespace NModbus
         public static IModbusSerialMaster CreateAsciiMaster(this IModbusFactory factory, IStreamResource streamResource)
         {
             IModbusAsciiTransport transport = factory.CreateAsciiTransport(streamResource);
-
             return new ModbusSerialMaster(transport);
         }
 
@@ -52,11 +51,9 @@ namespace NModbus
         /// <param name="factory"></param>
         /// <param name="streamResource"></param>
         /// <returns></returns>
-        public static IModbusSlaveNetwork CreateRtuSlaveNetwork(this IModbusFactory factory,
-            IStreamResource streamResource)
+        public static IModbusSlaveNetwork CreateRtuSlaveNetwork(this IModbusFactory factory, IStreamResource streamResource)
         {
             IModbusRtuTransport transport = factory.CreateRtuTransport(streamResource);
-
             return factory.CreateSlaveNetwork(transport);
         }
 
