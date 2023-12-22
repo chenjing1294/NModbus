@@ -52,12 +52,16 @@ namespace NModbus.IO
 
         internal byte[] ReadRequestResponse()
         {
+            string readLine = StreamResourceUtility.ReadLine(StreamResource);
+            byte[] bytes = System.Text.Encoding.UTF8.GetBytes(readLine + Modbus.NewLine);
+            Logger.LogFrameRx(bytes);
+
             // read message frame, removing frame start ':'
-            string frameHex = StreamResourceUtility.ReadLine(StreamResource).Substring(1);
+            string frameHex = readLine.Substring(1);
 
             // convert hex to bytes
             byte[] frame = ModbusUtility.HexToBytes(frameHex);
-            Logger.Trace($"RX: {string.Join(", ", frame)}");
+            // Logger.Trace($"RX: {string.Join(", ", frame)}");
 
             if (frame.Length < 3)
             {

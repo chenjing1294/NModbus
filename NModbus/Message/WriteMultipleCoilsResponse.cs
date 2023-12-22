@@ -3,6 +3,9 @@ using System.Net;
 
 namespace NModbus.Message
 {
+    /// <summary>
+    /// 对写多个线圈功能码的响应消息
+    /// </summary>
     public class WriteMultipleCoilsResponse : AbstractModbusMessage, IModbusMessage
     {
         public WriteMultipleCoilsResponse()

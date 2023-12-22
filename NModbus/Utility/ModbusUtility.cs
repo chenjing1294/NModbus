@@ -167,7 +167,7 @@ namespace NModbus.Utility
         }
 
         /// <summary>
-        ///     Calculate Longitudinal Redundancy Check.
+        /// Calculate Longitudinal Redundancy Check.
         /// </summary>
         /// <param name="data">The data used in LRC.</param>
         /// <returns>LRC value.</returns>
@@ -191,7 +191,7 @@ namespace NModbus.Utility
         }
 
         /// <summary>
-        ///     Calculate Cyclical Redundancy Check.
+        /// Calculate Cyclical Redundancy Check.
         /// </summary>
         /// <param name="data">The data used in CRC.</param>
         /// <returns>CRC value.</returns>

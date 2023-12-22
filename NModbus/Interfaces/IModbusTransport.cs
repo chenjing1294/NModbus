@@ -19,6 +19,9 @@ namespace NModbus
 
         T UnicastMessage<T>(IModbusMessage message) where T : IModbusMessage, new();
 
+        /// <summary>
+        /// 作为从站：读取主站发送的数据帧
+        /// </summary>
         byte[] ReadRequest();
 
         byte[] BuildMessageFrame(IModbusMessage message);

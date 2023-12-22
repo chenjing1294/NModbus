@@ -9,8 +9,7 @@ namespace NModbus.Device
     /// </summary>
     public class ModbusSerialMaster : ModbusMaster, IModbusSerialMaster
     {
-        public ModbusSerialMaster(IModbusSerialTransport transport)
-            : base(transport)
+        public ModbusSerialMaster(IModbusSerialTransport transport) : base(transport)
         {
         }
 

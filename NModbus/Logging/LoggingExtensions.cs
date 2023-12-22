@@ -92,9 +92,10 @@ namespace NModbus.Logging
             {
                 if (logger.ShouldLog(LoggingLevel.Trace))
                 {
-                    string prefix = frame.DoesCrcMatch() ? validPrefix : invalidPrefix;
+                    //TODO 应该根据是 ASCII 模式还是 RTU 模式，分开校验
+                    // string prefix = frame.DoesCrcMatch() ? validPrefix : invalidPrefix;
 
-                    logger.Trace($"{prefix}: {string.Join(" ", frame.Select(b => b.ToString("X2")))}");
+                    logger.Trace($"{validPrefix}: {string.Join(" ", frame.Select(b => b.ToString("X2")))}");
                 }
             }
         }

@@ -8,20 +8,20 @@ using NModbus.Unme.Common;
 namespace NModbus.Message
 {
     /// <summary>
-    ///     Write Multiple Coils request.
+    /// 写多个线圈请求
     /// </summary>
     public class WriteMultipleCoilsRequest : AbstractModbusMessageWithData<DiscreteCollection>, IModbusRequest
     {
-        /// <summary>
-        ///     Write Multiple Coils request.
-        /// </summary>
         public WriteMultipleCoilsRequest()
         {
         }
 
         /// <summary>
-        ///     Write Multiple Coils request.
+        /// 写多个线圈
         /// </summary>
+        /// <param name="slaveAddress">起始地址</param>
+        /// <param name="startAddress">要写入的线圈数量</param>
+        /// <param name="data">要写入的数据</param>
         public WriteMultipleCoilsRequest(byte slaveAddress, ushort startAddress, DiscreteCollection data)
             : base(slaveAddress, ModbusFunctionCodes.WriteMultipleCoils)
         {

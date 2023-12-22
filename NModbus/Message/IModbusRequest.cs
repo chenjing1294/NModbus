@@ -1,13 +1,14 @@
 ﻿namespace NModbus.Message
 {
     /// <summary>
-    ///     Methods specific to a modbus request message.
+    /// 表示从站发起的请求消息
     /// </summary>
     public interface IModbusRequest : IModbusMessage
     {
         /// <summary>
-        ///     Validate the specified response against the current request.
+        /// 根据当前请求验证对应的响应
         /// </summary>
+        /// <param name="response">该请求对应的响应</param>
         void ValidateResponse(IModbusMessage response);
     }
 }

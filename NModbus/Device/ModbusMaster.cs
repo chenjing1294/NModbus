@@ -12,8 +12,7 @@ namespace NModbus.Device
     /// </summary>
     public abstract class ModbusMaster : ModbusDevice, IModbusMaster
     {
-        protected ModbusMaster(IModbusTransport transport)
-            : base(transport)
+        protected ModbusMaster(IModbusTransport transport) : base(transport)
         {
         }
 
@@ -385,14 +384,13 @@ namespace NModbus.Device
         }
 
         /// <summary>
-        ///    Executes the custom message.
+        /// Executes the custom message.
         /// </summary>
         /// <typeparam name="TResponse">The type of the response.</typeparam>
         /// <param name="request">The request.</param>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         [SuppressMessage("Microsoft.Usage", "CA2223:MembersShouldDifferByMoreThanReturnType")]
-        public TResponse ExecuteCustomMessage<TResponse>(IModbusMessage request)
-            where TResponse : IModbusMessage, new()
+        public TResponse ExecuteCustomMessage<TResponse>(IModbusMessage request) where TResponse : IModbusMessage, new()
         {
             return Transport.UnicastMessage<TResponse>(request);
         }
@@ -471,8 +469,7 @@ namespace NModbus.Device
             return Task.Factory.StartNew(() => PerformReadRegisters(request));
         }
 
-        private Task PerformWriteRequestAsync<T>(IModbusMessage request)
-            where T : IModbusMessage, new()
+        private Task PerformWriteRequestAsync<T>(IModbusMessage request) where T : IModbusMessage, new()
         {
             return Task.Factory.StartNew(() => Transport.UnicastMessage<T>(request));
         }

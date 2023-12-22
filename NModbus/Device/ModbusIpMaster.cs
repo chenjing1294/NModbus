@@ -11,8 +11,7 @@ namespace NModbus.Device
         ///     Modbus IP master device.
         /// </summary>
         /// <param name="transport">Transport used by this master.</param>
-        public ModbusIpMaster(IModbusTransport transport)
-            : base(transport)
+        public ModbusIpMaster(IModbusTransport transport) : base(transport)
         {
         }
 

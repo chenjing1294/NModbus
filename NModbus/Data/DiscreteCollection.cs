@@ -7,40 +7,37 @@ using System.Linq;
 namespace NModbus.Data
 {
     /// <summary>
-    ///     Collection of discrete values.
+    /// 离散值的集合（对应的寄存器种类：线圈状态和离散输入状态）
     /// </summary>
     public class DiscreteCollection : Collection<bool>, IModbusMessageDataCollection
     {
         /// <summary>
-        ///     Number of bits per byte.
+        /// Number of bits per byte.
         /// </summary>
         private const int BitsPerByte = 8;
 
         private readonly List<bool> _discretes;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DiscreteCollection" /> class.
+        /// Initializes a new instance of the <see cref="DiscreteCollection" /> class.
         /// </summary>
-        public DiscreteCollection()
-            : this(new List<bool>())
+        public DiscreteCollection() : this(new List<bool>())
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DiscreteCollection" /> class.
+        /// Initializes a new instance of the <see cref="DiscreteCollection" /> class.
         /// </summary>
         /// <param name="bits">Array for discrete collection.</param>
-        public DiscreteCollection(params bool[] bits)
-            : this((IList<bool>) bits)
+        public DiscreteCollection(params bool[] bits) : this((IList<bool>) bits)
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DiscreteCollection" /> class.
+        /// Initializes a new instance of the <see cref="DiscreteCollection" /> class.
         /// </summary>
         /// <param name="bytes">Array for discrete collection.</param>
-        public DiscreteCollection(params byte[] bytes)
-            : this()
+        public DiscreteCollection(params byte[] bytes) : this()
         {
             if (bytes == null)
             {
@@ -63,11 +60,10 @@ namespace NModbus.Data
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DiscreteCollection" /> class.
+        /// Initializes a new instance of the <see cref="DiscreteCollection" /> class.
         /// </summary>
         /// <param name="bits">List for discrete collection.</param>
-        public DiscreteCollection(IList<bool> bits)
-            : this(new List<bool>(bits))
+        public DiscreteCollection(IList<bool> bits) : this(new List<bool>(bits))
         {
         }
 
@@ -75,15 +71,14 @@ namespace NModbus.Data
         ///     Initializes a new instance of the <see cref="DiscreteCollection" /> class.
         /// </summary>
         /// <param name="bits">List for discrete collection.</param>
-        internal DiscreteCollection(List<bool> bits)
-            : base(bits)
+        internal DiscreteCollection(List<bool> bits) : base(bits)
         {
             Debug.Assert(bits != null, "Discrete bits is null.");
             _discretes = bits;
         }
 
         /// <summary>
-        ///     Gets the network bytes.
+        /// Gets the network bytes.
         /// </summary>
         public byte[] NetworkBytes
         {
@@ -104,15 +99,15 @@ namespace NModbus.Data
         }
 
         /// <summary>
-        ///     Gets the byte count.
+        /// Gets the byte count.
         /// </summary>
         public byte ByteCount => (byte) ((Count + 7) / 8);
 
         /// <summary>
-        ///     Returns a <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" />.
+        /// Returns a <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" />.
         /// </summary>
         /// <returns>
-        ///     A <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" />.
+        /// A <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" />.
         /// </returns>
         public override string ToString()
         {

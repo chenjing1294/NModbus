@@ -1,9 +1,9 @@
 ﻿namespace NModbus
 {
     /// <summary>
-    ///     Defines constants related to the Modbus protocol.
+    /// Defines constants related to the Modbus protocol.
     /// </summary>
-    internal static class Modbus
+    public static class Modbus
     {
         public const int MaximumDiscreteRequestResponseSize = 2040;
         public const int MaximumRegisterRequestResponseSize = 127;
@@ -12,7 +12,7 @@
         public const byte ExceptionOffset = 128;
 
         // default setting for number of retries for IO operations
-        public const int DefaultRetries = 3;
+        public const int DefaultRetries = 0;
 
         // default number of milliseconds to wait after encountering an ACKNOWLEGE or SLAVE DEVIC BUSY slave exception response.
         public const int DefaultWaitToRetryMilliseconds = 250;

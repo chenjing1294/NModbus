@@ -3,7 +3,7 @@
 namespace NModbus
 {
     /// <summary>
-    ///     A message built by the master (client) that initiates a Modbus transaction.
+    /// 代表主站的响应消息或从站的请求消息
     /// </summary>
     public interface IModbusMessage
     {
@@ -18,13 +18,13 @@ namespace NModbus
         byte SlaveAddress { get; set; }
 
         /// <summary>
-        ///     Composition of the slave address and protocol data unit.
+        /// 从站地址+PDU，不包括校验
         /// </summary>
         [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         byte[] MessageFrame { get; }
 
         /// <summary>
-        ///     Composition of the function code and message data.
+        /// 协议数据单元：功能码+数据
         /// </summary>
         [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         byte[] ProtocolDataUnit { get; }
@@ -35,7 +35,7 @@ namespace NModbus
         ushort TransactionId { get; set; }
 
         /// <summary>
-        ///     Initializes a modbus message from the specified message frame.
+        /// 将主站发送的数据帧初始化
         /// </summary>
         /// <param name="frame">Bytes of Modbus frame.</param>
         void Initialize(byte[] frame);

@@ -3,24 +3,23 @@
 namespace NModbus
 {
     /// <summary>
-    /// A Modbus slave message handler.
+    /// Modbus消息处理器，可以作为从站，也可以作为主站
     /// </summary>
     public interface IModbusFunctionService
     {
         /// <summary>
-        /// The function code that this handles
+        /// 该 Service 示例所能处理的功能码
         /// </summary>
         byte FunctionCode { get; }
 
         /// <summary>
-        /// Creates a message that wrapps the request frame.
+        /// 作为从站：将主站发起的原始字节帧包装起来
         /// </summary>
-        /// <param name="frame"></param>
-        /// <returns></returns>
+        /// <param name="frame">原始的完整的字节帧</param>
         IModbusMessage CreateRequest(byte[] frame);
 
         /// <summary>
-        /// Handle a slave request.
+        /// 作为从站：处理主站发起的请求
         /// </summary>
         /// <param name="request"></param>
         /// <param name="dataStore"></param>
@@ -28,17 +27,17 @@ namespace NModbus
         IModbusMessage HandleSlaveRequest(IModbusMessage request, ISlaveDataStore dataStore);
 
         /// <summary>
-        /// Gets the number of bytes to read for a request
+        /// 作为从站：主站发起的请求已经读取了一些字节，还需要读取多少字节
         /// </summary>
-        /// <param name="frameStart"></param>
-        /// <returns></returns>
+        /// <param name="frameStart">已经读取的字节</param>
+        /// <returns>还需要读取多少字节</returns>
         int GetRtuRequestBytesToRead(byte[] frameStart);
 
         /// <summary>
-        /// Gets the number of bytes to read for a response.
+        /// 作为主站：已经读取了一些从站返回的响应，还需要读取多少字节
         /// </summary>
-        /// <param name="frameStart"></param>
-        /// <returns></returns>
+        /// <param name="frameStart">已经读取的字节</param>
+        /// <returns>还需要读取多少字节</returns>
         int GetRtuResponseBytesToRead(byte[] frameStart);
     }
 }

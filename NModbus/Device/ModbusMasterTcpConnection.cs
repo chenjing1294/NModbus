@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using NModbus.IO;
-using NModbus.Message;
 using NModbus.Logging;
+using NModbus.Extensions;
 
 namespace NModbus.Device
 {
-    using Extensions;
-
     /// <summary>
     /// Represents an incoming connection from a Modbus master. Contains the slave's logic to process the connection.
     /// </summary>
@@ -93,8 +90,8 @@ namespace NModbus.Device
 
                     Logger.Debug($"Read frame from Master at {EndPoint} completed {readBytes} bytes");
                     byte[] frame = _mbapHeader.Concat(_messageFrame).ToArray();
-                    Logger.Trace($"RX from Master at {EndPoint}: {string.Join(", ", frame)}");
-
+                    // Logger.Trace($"RX from Master at {EndPoint}: {string.Join(", ", frame)}");
+                    Logger.LogFrameRx(frame);
                     var request = _modbusFactory.CreateModbusRequest(_messageFrame);
                     request.TransactionId = (ushort) IPAddress.NetworkToHostOrder(BitConverter.ToInt16(frame, 0));
 
@@ -110,7 +107,8 @@ namespace NModbus.Device
 
                         // write response
                         byte[] responseFrame = Transport.BuildMessageFrame(response);
-                        Logger.Information($"TX to Master at {EndPoint}: {string.Join(", ", responseFrame)}");
+                        // Logger.Information($"TX to Master at {EndPoint}: {string.Join(", ", responseFrame)}");
+                        Logger.LogFrameTx(responseFrame);
                         await Stream.WriteAsync(responseFrame, 0, responseFrame.Length).ConfigureAwait(false);
                     }
                 }

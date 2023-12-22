@@ -3,9 +3,9 @@ using System.Text;
 
 namespace NModbus.IO
 {
-    internal static class StreamResourceUtility
+    public static class StreamResourceUtility
     {
-        internal static string ReadLine(IStreamResource stream)
+        public static string ReadLine(IStreamResource stream)
         {
             var result = new StringBuilder();
             var singleByteBuffer = new byte[1];
